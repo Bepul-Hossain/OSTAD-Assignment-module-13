@@ -25,7 +25,7 @@ spec:
 
           env:
             - name: REACT_APP_API_URL
-              value: http://backend-service:5000
+              value: http://13.206.101.197:3000
 
           resources:
             requests:
