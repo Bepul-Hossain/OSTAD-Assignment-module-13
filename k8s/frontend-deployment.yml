@@ -18,10 +18,10 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bepul2/3tier-frontend:v1
+          image: bepul2/3tier-frontend:v2
 
           ports:
-            - containerPort: 3000
+            - containerPort: 5173
 
           env:
             - name: REACT_APP_API_URL
