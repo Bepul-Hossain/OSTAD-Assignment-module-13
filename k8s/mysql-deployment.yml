@@ -26,7 +26,7 @@ spec:
 
           env:
             - name: POSTGRES_DB
-              value: appdb
+              value: bmi_db
 
             - name: POSTGRES_USER
               valueFrom:

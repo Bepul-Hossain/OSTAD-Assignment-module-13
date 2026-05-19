@@ -24,11 +24,29 @@ spec:
             - containerPort: 3000
 
           env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATABASE_URL
+
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: app-config
                   key: DB_HOST
+
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_PORT
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_NAME
 
             - name: DB_USER
               valueFrom:
