@@ -8,5 +8,7 @@ metadata:
 data:
   DB_HOST: postgres-service
   DB_PORT: "5432"
-  DB_NAME: appdb
-  API_URL: http://backend-service:5000
+  DB_NAME: bmi_db
+  API_URL: http://backend-service:3000
+
+  DATABASE_URL: postgresql://admin:password123@postgres-service:5432/bmi_db
