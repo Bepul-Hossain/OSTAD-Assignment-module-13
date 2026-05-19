@@ -3,37 +3,75 @@ kind: Deployment
 metadata:
   name: postgres
   namespace: three-tier-app
+  labels:
+    app: postgres
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: postgres
+
+  strategy:
+    type: Recreate   # IMPORTANT FIX (avoids ReplicaFailure issues)
+
   template:
     metadata:
       labels:
         app: postgres
+
     spec:
       containers:
         - name: postgres
           image: postgres:15
+
           ports:
             - containerPort: 5432
+
           env:
             - name: POSTGRES_DB
               value: bmi_db
+
             - name: POSTGRES_USER
               value: admin
+
             - name: POSTGRES_PASSWORD
               value: password123
+
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "admin"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", "admin"]
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: postgres-service
   namespace: three-tier-app
+
 spec:
   selector:
     app: postgres
+
   ports:
     - port: 5432
       targetPort: 5432
+
+  type: ClusterIP
