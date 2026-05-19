@@ -24,8 +24,8 @@ spec:
             - containerPort: 5173
 
           env:
-            - name: REACT_APP_API_URL
-              value: http://13.206.101.197:3000
+            - name: VITE_API_URL
+              value: http://13.206.101.197:3000/api
 
           resources:
             requests:
