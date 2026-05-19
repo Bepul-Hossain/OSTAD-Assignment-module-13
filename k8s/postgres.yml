@@ -14,7 +14,7 @@ spec:
       app: postgres
 
   strategy:
-    type: Recreate   # IMPORTANT FIX (avoids ReplicaFailure issues)
+    type: Recreate
 
   template:
     metadata:
@@ -53,11 +53,11 @@ spec:
 
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
+              cpu: "50m"
+              memory: "64Mi"
             limits:
-              memory: "256Mi"
-              cpu: "200m"
+              cpu: "100m"
+              memory: "128Mi"
 
 ---
 apiVersion: v1
